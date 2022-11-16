@@ -513,7 +513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  doubleTapTime: 0.2
+  doubleTapTime: 0.3
   jumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4

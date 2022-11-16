@@ -65,20 +65,17 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            float timeSinceTap = Time.time - previousTap;
-
-            if (timeSinceTap <= doubleTapTime)
-            {
-                moveSpeed = 10f;
-            }
-            else
-            {
-                moveSpeed = 5f;
-            }
-
-            previousTap = Time.time;
+            Run();
         }
-        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            moveSpeed = 5f;
+        }
+        else if (!Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.A))
+        {
+            moveSpeed = 5f;
+        }
+        else if (!Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.D))
         {
             moveSpeed = 5f;
         }
@@ -89,6 +86,22 @@ public class PlayerController : MonoBehaviour
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+    }
+
+    public void Run()
+    {
+        float timeSinceTap = Time.time - previousTap;
+
+        if (timeSinceTap <= doubleTapTime)
+        {
+            moveSpeed = 10f;
+        }
+        else
+        {
+            moveSpeed = 5f;
+        }
+
+        previousTap = Time.time;
     }
 
     private void DragControl()
