@@ -6,30 +6,62 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     Rigidbody rb;
+    float moveX;
+    float moveZ;
 
     private float previousTap;
     public float doubleTapTime = 0.2f;
 
     public int jumpForce;
+    public float jumpCooldown;
+    public float airMultiplier;
+    bool readyToJump;
     private CapsuleCollider capCollider;
     public LayerMask groundLayerMask;
     public bool isGrounded;
-    public bool isJumping = false;
-    public float yVelocity;
-    public float gravity = -9.81f;
+
+    public Transform orientation;
+    Vector3 moveDir;
+    public float drag;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         capCollider = transform.GetComponent<CapsuleCollider>();
+        readyToJump = true;
     }
 
     void Update()
     {
-        if (isGrounded && yVelocity < 0)
+        MyInput();
+        DragControl();
+        SpeedControl();
+    }
+
+    void FixedUpdate()
+    {
+        PlayerPhysics();
+    }
+
+    private void PlayerPhysics()
+    {
+        isGrounded = Physics.Raycast(capCollider.bounds.center, Vector3.down, 1f, groundLayerMask);
+        moveDir = orientation.forward * moveZ + orientation.right * moveX;
+        
+        if (isGrounded)
         {
-            yVelocity = 0f;
+            rb.AddForce(moveDir.normalized * moveSpeed * 10f, ForceMode.Force);
         }
+        else if (!isGrounded)
+        {
+            rb.AddForce(moveDir.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+    }
+
+    private void MyInput()
+    {
+        moveX = Input.GetAxisRaw("Horizontal");
+        moveZ = Input.GetAxisRaw("Vertical");
 
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -51,29 +83,45 @@ public class PlayerController : MonoBehaviour
             moveSpeed = 5f;
         }
 
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && readyToJump && isGrounded)
         {
-            isJumping = true;
+            readyToJump = false;
+            Jump();
+            Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
 
-    void FixedUpdate()
+    private void DragControl()
     {
-        if (isJumping)
+        if (isGrounded)
         {
-            isJumping = false;
-            isGrounded = false;
-            yVelocity += jumpForce * Time.deltaTime;
+            rb.drag = drag;
         }
         else
         {
-            isGrounded = Physics.Raycast(capCollider.bounds.center, Vector3.down, 1f, groundLayerMask);
+            rb.drag = 0;
         }
+    }
 
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveZ = Input.GetAxisRaw("Vertical");
-        rb.velocity = new Vector3(moveX, yVelocity, moveZ) * moveSpeed;
+    private void SpeedControl()
+    {
+        Vector3 constVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        yVelocity += gravity * Time.deltaTime;
+        if (constVelocity.magnitude > moveSpeed)
+        {
+            Vector3 limitSpeed = constVelocity.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitSpeed.x, rb.velocity.y, limitSpeed.z);
+        }
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void ResetJump()
+    {
+        readyToJump = true;
     }
 }
