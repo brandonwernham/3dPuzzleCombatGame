@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerPhysics()
     {
-        isGrounded = Physics.Raycast(capCollider.bounds.center, Vector3.down, 1f, groundLayerMask);
+        isGrounded = Physics.Raycast(capCollider.bounds.center, Vector3.down, 1.5f, groundLayerMask);
         moveDir = orientation.forward * moveZ + orientation.right * moveX;
         
         if (isGrounded)
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
         if (timeSinceTap <= doubleTapTime)
         {
-            moveSpeed = 10f;
+            moveSpeed = 7f;
         }
         else
         {
