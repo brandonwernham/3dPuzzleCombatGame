@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
         if (timeSinceTap <= doubleTapTime)
         {
-            moveSpeed = 7f;
+            moveSpeed = 8f;
         }
         else
         {
