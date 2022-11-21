@@ -24,9 +24,6 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDir;
     public float drag;
 
-    public GameObject projectile;
-    public Transform shootPoint;
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -88,11 +85,6 @@ public class PlayerController : MonoBehaviour
             readyToJump = false;
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameObject bullet = Instantiate(projectile, shootPoint.position, shootPoint.rotation);
         }
     }
 

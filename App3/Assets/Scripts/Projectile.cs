@@ -6,10 +6,12 @@ public class Projectile : MonoBehaviour
 {
     public float projectileSpeed;
     Rigidbody rb;
+    float timeTillDestroy = 1f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Destroy(gameObject, timeTillDestroy);
     }
     void Update()
     {
