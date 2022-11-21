@@ -203,7 +203,5 @@ MonoBehaviour:
   isGrounded: 0
   orientation: {fileID: 4265046735927874185}
   drag: 5
-  maxStepHeight: {fileID: 0}
-  minStepHeight: {fileID: 0}
-  stepHeight: 0
-  stepSmooth: 1
+  projectile: {fileID: 0}
+  shootPoint: {fileID: 0}
