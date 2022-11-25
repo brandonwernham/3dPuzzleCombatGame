@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ButtonController : MonoBehaviour
 {
@@ -9,24 +10,29 @@ public class ButtonController : MonoBehaviour
     public bool hasKey;
     public bool isCountingDown;
     public float countdown;
-    public Text countdownText;
+    public TextMeshProUGUI countdownText;
     public GameObject gate1;
     public GameObject gate2;
+    public Material red;
+    public GameObject greenLight;
+    public ButtonInteract otherButton1;
+    public ButtonInteract otherButton2;
 
     void Update()
     {
         if (isCountingDown)
         {
+            otherButton1.buttonPressed = true;
+            otherButton2.buttonPressed = true;
             if (countdown > 0)
             {
                 countdown -= Time.deltaTime;
             }
-            double temp = System.Math.Round(countdown, 2);
+            double temp = System.Math.Round(countdown, 0);
             countdownText.text = temp.ToString();
             if (countdown <= 0)
             {
                 isCountingDown = false;
-                // something here to take away the count text
                 CheckForKey();
             }
         }
@@ -37,7 +43,6 @@ public class ButtonController : MonoBehaviour
         if (!isPressed)
         {
             isPressed = true;
-            Debug.Log("The button was pressed");
             Countdown();
         }
     }
@@ -49,10 +54,28 @@ public class ButtonController : MonoBehaviour
 
     public void CheckForKey()
     {
+        isCountingDown = false;
+
+        if (!otherButton1.buttonAlreadySearched)
+        {
+            otherButton1.buttonPressed = false;
+        }
+        if (!otherButton2.buttonAlreadySearched)
+        {
+            otherButton2.buttonPressed = false;
+        }
+
         if (hasKey)
         {
+            countdownText.text = "Key found! The doors have opened!";
             Destroy(gate1);
             Destroy(gate2); 
+        }
+        else
+        {
+            countdownText.text = "Key not found!";
+            gameObject.GetComponent<MeshRenderer>().material = red;
+            Destroy(greenLight);
         }
     }
 }
