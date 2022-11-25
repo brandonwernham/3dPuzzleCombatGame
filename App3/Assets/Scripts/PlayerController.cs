@@ -24,11 +24,17 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDir;
     public float drag;
 
+    public int maxHealth;
+    public int currentHealth;
+    public HealthBar healthBar;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         capCollider = transform.GetComponent<CapsuleCollider>();
         readyToJump = true;
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     void Update()
@@ -36,6 +42,11 @@ public class PlayerController : MonoBehaviour
         MyInput();
         DragControl();
         SpeedControl();
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
     void FixedUpdate()
@@ -136,5 +147,24 @@ public class PlayerController : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+    }
+
+    void Die()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage(1);
+        }
     }
 }

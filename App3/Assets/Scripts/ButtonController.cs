@@ -17,13 +17,24 @@ public class ButtonController : MonoBehaviour
     public GameObject greenLight;
     public ButtonInteract otherButton1;
     public ButtonInteract otherButton2;
+    public EnemySpawn spawn1;
+    public EnemySpawn spawn2;
+    public EnemySpawn spawn3;
+    public EnemySpawn spawn4;
+    public float rapidSpawn;
 
     void Update()
     {
         if (isCountingDown)
         {
+            spawn1.startTime = rapidSpawn;
+            spawn2.startTime = rapidSpawn;
+            spawn3.startTime = rapidSpawn;
+            spawn4.startTime = rapidSpawn;
+
             otherButton1.buttonPressed = true;
             otherButton2.buttonPressed = true;
+
             if (countdown > 0)
             {
                 countdown -= Time.deltaTime;
@@ -55,6 +66,11 @@ public class ButtonController : MonoBehaviour
     public void CheckForKey()
     {
         isCountingDown = false;
+
+        spawn1.startTime = 10f;
+        spawn2.startTime = 10f;
+        spawn3.startTime = 10f;
+        spawn4.startTime = 10f;
 
         if (!otherButton1.buttonAlreadySearched)
         {

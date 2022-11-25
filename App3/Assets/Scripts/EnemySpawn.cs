@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     public GameObject spider;
+    public float startTime;
     public float timeBetweenSpawn;
 
     void Update()
@@ -16,7 +17,7 @@ public class EnemySpawn : MonoBehaviour
         if (timeBetweenSpawn <= 0)
         {
             Instantiate(spider, gameObject.transform);
-            timeBetweenSpawn = 10f;
+            timeBetweenSpawn = startTime;
         }
     }
 }
