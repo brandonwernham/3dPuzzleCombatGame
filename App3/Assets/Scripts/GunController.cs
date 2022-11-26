@@ -7,13 +7,23 @@ public class GunController : MonoBehaviour
     public Camera cam;
     public ParticleSystem gunFlash;
     public GameObject gunHitFlash;
+    public bool isPaused;
+
+    void Start()
+    {
+        isPaused = false;
+    }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!isPaused)
         {
-            Shoot();
+            if (Input.GetMouseButtonDown(0))
+            {
+                Shoot();
+            }
         }
+        
     }
 
     void Shoot()

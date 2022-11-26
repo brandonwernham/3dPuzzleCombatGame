@@ -22,6 +22,12 @@ public class ButtonController : MonoBehaviour
     public EnemySpawn spawn3;
     public EnemySpawn spawn4;
     public float rapidSpawn;
+    public GameObject endOfGame;
+
+    public void Start()
+    {
+        endOfGame.SetActive(false);    
+    }
 
     void Update()
     {
@@ -83,6 +89,7 @@ public class ButtonController : MonoBehaviour
 
         if (hasKey)
         {
+            endOfGame.SetActive(true);
             countdownText.text = "Key found! The doors have opened!";
             Destroy(gate1);
             Destroy(gate2); 

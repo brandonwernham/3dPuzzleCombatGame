@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;
 
     public float knockbackForce;
+    public string mainMenu;
 
     void Start()
     {
@@ -173,6 +175,14 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.CompareTag("Enemy"))
         {
             TakeDamage(1);
+        }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("EndGame"))
+        {
+            SceneManager.LoadScene(mainMenu);
         }
     }
 }
