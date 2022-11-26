@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     public int currentHealth;
     public HealthBar healthBar;
 
+    public float knockbackForce;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -153,6 +155,12 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        Knockback();
+    }
+
+    public void Knockback()
+    {
+        rb.AddForce(transform.up * knockbackForce, ForceMode.Impulse);
     }
 
     void Die()
