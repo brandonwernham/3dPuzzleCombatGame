@@ -41,6 +41,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3709294660888746092, guid: f4c03c825ad2d3e4196884b9ae08ebbb,
         type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 4265046736087080895, guid: 1bad89378ca6eaf4aa90f117004d8c21,
+        type: 3}
+    - target: {fileID: 3709294660888746092, guid: f4c03c825ad2d3e4196884b9ae08ebbb,
+        type: 3}
       propertyPath: coinCountText
       value: 
       objectReference: {fileID: 2542773521014701846, guid: b8bb27fa701168044b1ff8547a271cfd,

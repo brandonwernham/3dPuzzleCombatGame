@@ -58,10 +58,14 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Application.LoadLevel(Application.loadedLevel);
+
+        CoinCount.coinCount -= CoinCount.coinsThisGame;
     }
 
     public void MainMenu()
     {
         SceneManager.LoadScene(mainMenu);
+
+        CoinCount.coinCount -= CoinCount.coinsThisGame;
     }
 }
