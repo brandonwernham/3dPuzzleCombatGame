@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public string gameMap;
+    public string upgradeMenu;
 
     void Start()
     {
@@ -21,7 +22,7 @@ public class MainMenu : MonoBehaviour
 
     public void UpgradeMenu()
     {
-
+        SceneManager.LoadScene(upgradeMenu);
     }
 
     public void Exit()

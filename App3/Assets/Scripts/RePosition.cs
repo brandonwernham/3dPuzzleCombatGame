@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RePosition : MonoBehaviour
@@ -11,8 +12,12 @@ public class RePosition : MonoBehaviour
             int newX = Random.Range(-23, 23);
             int newZ = Random.Range(-23, 23);
             gameObject.transform.position = new Vector3(newX, 1, newZ);
-            Debug.Log("coin was re-positioned");
         }
 
+        if (col.gameObject.CompareTag("Player"))
+        {
+            CoinCount.coinCount += 1;
+            Debug.Log("Coins: " + CoinCount.coinCount);
+        }
     }
 }

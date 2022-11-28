@@ -5247,6 +5247,9 @@ MonoBehaviour:
   gunHitFlash: {fileID: 6395361098816903840, guid: 0bc82ed4aa6f5bf4f9ee7ae11a2c302d,
     type: 3}
   isPaused: 0
+  timeFactor: 1
+  timeBetweenShots: 0
+  powerFactor: 1
 --- !u!1001 &692305772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19215,6 +19218,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4265046736087080895, guid: 1bad89378ca6eaf4aa90f117004d8c21,
         type: 3}
+      propertyPath: coins
+      value: 
+      objectReference: {fileID: 3709294660888746092, guid: f4c03c825ad2d3e4196884b9ae08ebbb,
+        type: 3}
+    - target: {fileID: 4265046736087080895, guid: 1bad89378ca6eaf4aa90f117004d8c21,
+        type: 3}
       propertyPath: mainMenu
       value: MainMenu
       objectReference: {fileID: 0}
@@ -19243,6 +19252,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stepSmooth
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4265046736087080895, guid: 1bad89378ca6eaf4aa90f117004d8c21,
+        type: 3}
+      propertyPath: coinCountText
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4265046736087080895, guid: 1bad89378ca6eaf4aa90f117004d8c21,
         type: 3}
