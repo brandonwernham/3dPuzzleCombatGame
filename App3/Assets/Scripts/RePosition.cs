@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class RePosition : MonoBehaviour
 {
+    public AudioSource soundManager;
+    public AudioClip coinSound;
+
     void Start()
     {
         CoinCount.coinsThisGame = 0;
@@ -21,6 +24,7 @@ public class RePosition : MonoBehaviour
 
         if (col.gameObject.CompareTag("Player"))
         {
+            soundManager.PlayOneShot(coinSound);
             CoinCount.coinCount += 1;
             CoinCount.coinsThisGame += 1;
             Debug.Log("Coins: " + CoinCount.coinCount);

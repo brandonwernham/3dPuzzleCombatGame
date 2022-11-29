@@ -24,6 +24,9 @@ public class ButtonController : MonoBehaviour
     public float rapidSpawn;
     public GameObject endOfGame;
 
+    public AudioSource soundManager;
+    public AudioClip searchingSound;
+
     public void Start()
     {
         endOfGame.SetActive(false);    
@@ -60,6 +63,7 @@ public class ButtonController : MonoBehaviour
         if (!isPressed)
         {
             isPressed = true;
+            soundManager.PlayOneShot(searchingSound);
             Countdown();
         }
     }

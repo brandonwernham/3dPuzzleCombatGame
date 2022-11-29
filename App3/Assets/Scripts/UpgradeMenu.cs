@@ -11,6 +11,8 @@ public class UpgradeMenu : MonoBehaviour
     public Button su2;
     public Button pu1;
     public Button pu2;
+    public AudioSource soundManager;
+    public AudioClip hoverSound;
 
     void Update()
     {
@@ -46,6 +48,11 @@ public class UpgradeMenu : MonoBehaviour
             pu2.GetComponent<Image>().color = Color.green;
             pu2.interactable = false;
         }
+    }
+
+    public void HoverSound()
+    {
+        soundManager.PlayOneShot(hoverSound);
     }
 
     public void SU1()

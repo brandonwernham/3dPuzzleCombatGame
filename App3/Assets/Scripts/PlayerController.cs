@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
     public float knockbackForce;
     public string mainMenu;
 
+    public AudioSource soundManager;
+    public AudioClip ouchSound;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -156,6 +159,7 @@ public class PlayerController : MonoBehaviour
 
     void TakeDamage(int damage)
     {
+        soundManager.PlayOneShot(ouchSound);
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         Knockback();
@@ -168,6 +172,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
+        CoinCount.coinCount -= CoinCount.coinsThisGame;
         Application.LoadLevel(Application.loadedLevel);
     }
 

@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
     public PlayerCamera playerCam;
     public GunController gun;
     public string mainMenu;
+    public AudioSource soundManager;
+    public AudioClip hoverSound;
 
     void Update()
     {
@@ -24,6 +26,11 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+    }
+
+    public void HoverSound()
+    {
+        soundManager.PlayOneShot(hoverSound);
     }
 
     public void Resume()

@@ -7,11 +7,15 @@ public class GunController : MonoBehaviour
     public Camera cam;
     public ParticleSystem gunFlash;
     public GameObject gunHitFlash;
+
     public bool isPaused;
 
     public float timeFactor;
     public float timeBetweenShots;
     public float powerFactor;
+
+    public AudioSource soundManager;
+    public AudioClip shootSound;
 
     void Start()
     {
@@ -61,6 +65,7 @@ public class GunController : MonoBehaviour
 
     void Shoot()
     {
+        soundManager.PlayOneShot(shootSound);
         gunFlash.Play();
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
@@ -71,6 +76,7 @@ public class GunController : MonoBehaviour
             {
                 target.TakeDamage(damage);
             }
+
 
             GameObject impactObject = Instantiate(gunHitFlash, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactObject, 0.1f);
